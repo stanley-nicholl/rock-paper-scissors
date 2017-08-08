@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="./supporting-files/reset.css" type="text/css">
+  <link rel="stylesheet" href="./supporting-files/style.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Saira" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+</head>
+
+<body>
+  <div class="main">
+    <div class="title-container">
+      <img src="./supporting-files/logo.png" class="logo" alt="">
+      <h1 class="title">ROCK<br>PAPER<br>SCISSORS</h1>
+    </div>
+    <div class="game">
+      <div id="user-selection-box">CHOOSE YOUR WEAPON!
+        <div class="images">
+          <div class="selection-box">
+            <img id="rock" src="./supporting-files/rock.jpg" alt="">
+            <p>ROCK</p>
+          </div>
+          <div class="selection-box">
+            <img id="paper" src="./supporting-files/paper.jpg" alt="">
+            <p>PAPER</p>
+          </div>
+          <div class="selection-box">
+            <img id="scissors" src="./supporting-files/scissors.png" alt="">
+            <p>SCISSORS</p>
+          </div>
+        </div>
+      </div>
+      <div class="results">
+        <div class="last-game-results">SCOREBOARD
+          <div class="outcome">
+            <p id="game-outcome"></p>
+          </div>
+          <div class="selection-info">
+            <p id="selections"></p>
+          </div>
+        </div>
+        <div class="container">
+          <div class="player-score">
+            <div id="human-score-box">
+              <p id="human-score"></p>
+            </div>
+            <div class="player-name">
+              <p>YOU</p>
+            </div>
+          </div>
+          <div class="vs">
+            <img src="./supporting-files/versus-white.png" alt="">
+          </div>
+          <div class="player-score">
+            <div id="cpu-score-box">
+              <p id="cpu-score"></p>
+            </div>
+            <div class="player-name">
+              <p>CPU</p>
+            </div>
+          </div>
+        </div>
+        <div class="button">
+          <button class="btn" type="button" name="reset">CLEAR</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  <footer>
+    <div class="footer-content">
+      <img src="./supporting-files/white-logo.png" alt="">
+      <p>jabroni, inc.</p>
+    </div>
+  </footer>
+
+  <script>
+    var userSelection = '';
+    var cpuSelection = '';
+    var winner = ''
+    var gameStats = {
+      playerScore: 0,
+      cpuScore: 0
+    }
+
+    $('#cpu-score').text(gameStats['cpuScore']);
+    $('#human-score').text(gameStats['playerScore']);
+
+    function updatePage() {
+      if (winner === 'CPU') {
+        gameStats['cpuScore'] += 1;
+        $('#cpu-score').text(gameStats['cpuScore']);
+        $('#game-outcome').css('color', '#d20342');
+        $('#game-outcome').text('You Lose!');
+        $('#selections').text('You chose ' + userSelection + ' and the CPU chose ' + cpuSelection)
+      } else if (winner === 'PLAYER') {
+        gameStats['playerScore'] += 1;
+        $('#human-score').text(gameStats['playerScore']);
+        $('#game-outcome').css('color', '#2b26b6');
+        $('#game-outcome').text('You Win!');
+        $('#selections').text('You chose ' + userSelection + ' and the CPU both chose ' + cpuSelection)
+      } else {
+        $('#game-outcome').css('color', '#000');
+        $('#game-outcome').text("It's a tie")
+        $('#selections').text('You and the CPU chose ' + userSelection)
+      }
+    }
+
+    function pickTheWinner() {
+      if (userSelection === cpuSelection) {
+        winner = 'tie';
+      } else if (userSelection === 'rock' && cpuSelection === 'paper') {
+        winner = 'CPU';
+      } else if (userSelection === 'rock' && cpuSelection === 'scissors') {
+        winner = 'PLAYER';
+      } else if (userSelection === 'paper' && cpuSelection === 'scissors') {
+        winner = 'CPU';
+      } else if (userSelection === 'paper' && cpuSelection === 'rock') {
+        winner = 'PLAYER';
+      } else if (userSelection === 'scissors' && cpuSelection === 'paper') {
+        winner = 'PLAYER';
+      } else if (userSelection === 'scissors' && cpuSelection === 'rock') {
+        winner = 'CPU';
+      }
+      console.log('winner is ' + winner);
+      updatePage();
+    }
+
+    function computerSelection() {
+      var randomNum = [Math.floor(Math.random() * 3)];
+      randomNum = parseInt(randomNum);
+      if (randomNum === 0) {
+        cpuSelection = 'rock'
+      } else if (randomNum === 1) {
+        cpuSelection = 'paper'
+      } else {
+        cpuSelection = 'scissors'
+      }
+      console.log('CPU selected ' + cpuSelection);
+      console.log('PLAYER selected ' + userSelection);
+      pickTheWinner()
+    }
+
+
+    $('#rock').click(function(event) {
+      userSelection = 'rock';
+      computerSelection();
+    })
+
+    $('#paper').click(function(event) {
+      userSelection = 'paper';
+      computerSelection();
+    })
+
+    $('#scissors').click(function(event) {
+      userSelection = 'scissors';
+      computerSelection();
+    })
+  </script>
+</body>
+
+</html>
