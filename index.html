@@ -20,7 +20,10 @@
       <h1 class="title">ROCK<br>PAPER<br>SCISSORS</h1>
     </div>
     <div class="game">
-      <div id="user-selection-box">CHOOSE YOUR WEAPON!
+      <div id="user-selection-box">
+        <div class="instruction">
+          <p>CHOOSE YOUR WEAPON!</p>
+        </div>
         <div class="images">
           <div class="selection-box">
             <img id="rock" src="./supporting-files/rock.jpg" alt="">
@@ -38,12 +41,12 @@
       </div>
       <div class="results">
         <div class="last-game-results">SCOREBOARD
-          <div class="outcome">
+          <!-- <div class="outcome">
             <p id="game-outcome"></p>
           </div>
           <div class="selection-info">
             <p id="selections"></p>
-          </div>
+          </div> -->
         </div>
         <div class="container">
           <div class="player-score">
@@ -70,9 +73,15 @@
           <button class="btn" type="button" name="reset">CLEAR</button>
         </div>
       </div>
-
     </div>
-  </div>
+    <div id="outcomes">
+      <div class="outcome">
+        <p id="game-outcome"></p>
+      </div>
+      <div class="selection-info">
+        <p id="selections"></p>
+      </div>
+    </div>
   </div>
   <footer>
     <div class="footer-content">
@@ -105,11 +114,11 @@
         $('#human-score').text(gameStats['playerScore']);
         $('#game-outcome').css('color', '#2b26b6');
         $('#game-outcome').text('You Win!');
-        $('#selections').text('You chose ' + userSelection + ' and the CPU both chose ' + cpuSelection)
+        $('#selections').text('You chose ' + userSelection + ' and the CPU chose ' + cpuSelection)
       } else {
         $('#game-outcome').css('color', '#000');
         $('#game-outcome').text("It's a tie")
-        $('#selections').text('You and the CPU chose ' + userSelection)
+        $('#selections').text('You and the CPU both chose ' + userSelection)
       }
     }
 
@@ -151,16 +160,34 @@
 
     $('#rock').click(function(event) {
       userSelection = 'rock';
+      $('#rock').css("border", "2px solid #2b26b6")
+      $('#rock').css("box-shadow", "0 0 5px #2b26b6")
+      $('#scissors').css("border", "none")
+      $('#scissors').css("box-shadow", "none")
+      $('#paper').css("border", "none")
+      $('#paper').css("box-shadow", "none")
       computerSelection();
     })
 
     $('#paper').click(function(event) {
       userSelection = 'paper';
+      $('#paper').css("border", "2px solid #2b26b6")
+      $('#paper').css("box-shadow", "0 0 5px #2b26b6")
+      $('#rock').css("border", "none")
+      $('#rock').css("box-shadow", "none")
+      $('#scissors').css("border", "none")
+      $('#scissors').css("box-shadow", "none")
       computerSelection();
     })
 
     $('#scissors').click(function(event) {
       userSelection = 'scissors';
+      $('#scissors').css("border", "2px solid #2b26b6")
+      $('#scissors').css("box-shadow", "0 0 5px #2b26b6")
+      $('#rock').css("border", "none")
+      $('#rock').css("box-shadow", "none")
+      $('#paper').css("border", "none")
+      $('#paper').css("box-shadow", "none")
       computerSelection();
     })
   </script>
