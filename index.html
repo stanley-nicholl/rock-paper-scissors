@@ -102,23 +102,38 @@
     $('#cpu-score').text(gameStats['cpuScore']);
     $('#human-score').text(gameStats['playerScore']);
 
+    function clearBoard() {
+      gameStats['playerScore'] = 0;
+      gameStats['cpuScore'] = 0;
+      $('#cpu-score').text(gameStats['cpuScore']);
+      $('#human-score').text(gameStats['playerScore']);
+      $('#scissors').css("border", "none")
+      $('#scissors').css("box-shadow", "none")
+      $('#paper').css("border", "none")
+      $('#paper').css("box-shadow", "none")
+      $('#rock').css("border", "none")
+      $('#rock').css("box-shadow", "none")
+      $('#game-outcome').text('');
+      $('#selections').text('')
+    }
+
     function updatePage() {
       if (winner === 'CPU') {
         gameStats['cpuScore'] += 1;
         $('#cpu-score').text(gameStats['cpuScore']);
         $('#game-outcome').css('color', '#d20342');
         $('#game-outcome').text('You Lose!');
-        $('#selections').text('You chose ' + userSelection + ' and the CPU chose ' + cpuSelection)
+        $('#selections').text('You chose ' + userSelection + ' and the CPU chose ' + cpuSelection);
       } else if (winner === 'PLAYER') {
         gameStats['playerScore'] += 1;
         $('#human-score').text(gameStats['playerScore']);
         $('#game-outcome').css('color', '#2b26b6');
         $('#game-outcome').text('You Win!');
-        $('#selections').text('You chose ' + userSelection + ' and the CPU chose ' + cpuSelection)
+        $('#selections').text('You chose ' + userSelection + ' and the CPU chose ' + cpuSelection);
       } else {
         $('#game-outcome').css('color', '#000');
-        $('#game-outcome').text("It's a tie")
-        $('#selections').text('You and the CPU both chose ' + userSelection)
+        $('#game-outcome').text("It's a tie");
+        $('#selections').text('You and the CPU both chose ' + userSelection);
       }
     }
 
@@ -157,6 +172,9 @@
       pickTheWinner()
     }
 
+    $('.btn').click(function(event) {
+      clearBoard();
+    })
 
     $('#rock').click(function(event) {
       userSelection = 'rock';
